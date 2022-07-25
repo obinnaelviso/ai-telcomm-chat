@@ -13,4 +13,9 @@ class BotQuery extends Model
         'text',
         'bot_response_id',
     ];
+
+    public function botResponse()
+    {
+        return $this->belongsTo(BotResponse::class);
+    }
 }

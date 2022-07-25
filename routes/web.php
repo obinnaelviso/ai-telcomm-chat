@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BotController;
+use App\Http\Controllers\ChatController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,13 +17,12 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+Route::name('chat.')->group(function () {
+    Route::get('/', [ChatController::class, 'index'])->name('index');
+    Route::get('chat/messages', [ChatController::class, 'messages'])->name('messages');
+    Route::post('chat/register', [ChatController::class, 'registerChat'])->name('register');
+    Route::post('chat/message', [ChatController::class, 'sendMessage'])->name('message');
+    Route::post('chat/end', [ChatController::class, 'endChat'])->name('end');
 });
 
 // Group all routes that require authentication
@@ -35,8 +35,8 @@ Route::middleware('auth')->group(function () {
 
     // Manage Response
     Route::post('/manage-bot/response', [BotController::class, 'storeResponse'])->name('manage-bot.response');
-    Route::put('/manage-bot/response/{botResponse}', [BotController::class, 'updateResponse'])->name('manage-bot.response');
-    Route::delete('/manage-bot/response/{botResponse}', [BotController::class, 'destroyResponse'])->name('manage-bot.response');
+    Route::put('/manage-bot/response/{botResponse}', [BotController::class, 'updateResponse']);
+    Route::delete('/manage-bot/response/{botResponse}', [BotController::class, 'destroyResponse']);
 
     // Manage Query
     Route::post('/manage-bot/response/{botResponse}/query', [BotController::class, 'storeQuery'])->name('manage-bot.query');

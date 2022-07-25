@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('conversations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->constrained();
-            $table->foreignId('network_type_id')->constrained();
+            $table->string('tag')->constrained();
+            $table->timestamp('expired_at');
             $table->timestamps();
         });
     }

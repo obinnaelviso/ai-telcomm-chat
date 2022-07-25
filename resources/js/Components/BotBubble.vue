@@ -7,7 +7,7 @@
             <img src="../../images/chatbot-female.jpg" alt="chatbot-female">
         </div>
         <div>
-            <div class="min-w-[10px] max-w-lg shadow bg-yellow-300 my-3 rounded-b-lg rounded-tr-lg p-3">
+            <div class="min-w-[10px] max-w-lg shadow bg-yellow-200 my-3 rounded-b-lg rounded-tr-lg p-3">
                 <slot />
             </div>
         </div>

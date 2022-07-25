@@ -118,6 +118,7 @@ const handleQueryEdit = (query) => {
 }
 
 const openBotQueryDialog = (botResponseId) => {
+    addedQueries.value = [];
     botQueryForm.botResponseId = botResponseId;
     botQueryDialog.value = true;
 }
@@ -197,7 +198,7 @@ const deleteQuery = (queryId) => {
                     <el-input class="col-span-3" placeholder="Type in Bot Response" v-model="form.text" required></el-input>
                     <el-input placeholder="Tag" v-model="form.tag"></el-input>
                     <div class="flex">
-                        <el-button type="primary" class="flex-1">{{ isEditing ? 'Update' : 'Add' }}</el-button>
+                        <el-button type="primary" native-type="submit" class="flex-1">{{ isEditing ? 'Update' : 'Add' }}</el-button>
                         <el-button type="default" class="flex-shrink-1 ml-1" native-type="button" @click="cancelEdit()" v-if="isEditing">x</el-button>
                     </div>
                 </form>
